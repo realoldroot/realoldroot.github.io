@@ -849,7 +849,7 @@
 
       
         
-          <p>MYSQL 5.5 之前，UTF8 编码只支持1-3个字节，只支持BMP这部分的unicode编码区，BMP是从哪到哪，到<a href="http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters这里看，基本就是0000～FFFF这一区。" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters这里看，基本就是0000～FFFF这一区。</a> 从MYSQL5.5开始，可支持4个字节UTF编码utf8mb4，一个字符最多能有4字节，所以能支持更多的字符集。</p>
+          <p>MYSQL 5.5 之前，UTF8 编码只支持1-3个字节，只支持BMP这部分的unicode编码区，BMP是从哪到哪，<a href="http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters" target="_blank" rel="noopener">到这里看</a>，基本就是0000～FFFF这一区。 从MYSQL5.5开始，可支持4个字节UTF编码utf8mb4，一个字符最多能有4字节，所以能支持更多的字符集。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">utf8mb4 is a superset of utf8</span><br></pre></td></tr></table></figure>
 <p>utf8mb4兼容utf8，且比utf8能表示更多的字符。 </p>
 <p>emoji存入mysql需要字段字符集为utf8mb4。</p>
