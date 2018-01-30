@@ -123,18 +123,18 @@
 
 
 
-<meta name="description" content="wagon-maven-plugin，用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
+<meta name="description" content="wagon-maven-plugin,用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
 <meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个比较实用的maven发布项目到服务器的插件">
 <meta property="og:url" content="http://yoursite.com/2017/11/20/贴一个比较实用的maven发布项目到服务器的插件/index.html">
 <meta property="og:site_name" content="一点一滴">
-<meta property="og:description" content="wagon-maven-plugin，用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
+<meta property="og:description" content="wagon-maven-plugin,用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-30T09:02:37.700Z">
+<meta property="og:updated_time" content="2018-01-30T10:59:12.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个比较实用的maven发布项目到服务器的插件">
-<meta name="twitter:description" content="wagon-maven-plugin，用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
+<meta name="twitter:description" content="wagon-maven-plugin,用来把打包之后的文件发送到服务器上123456789101112&amp;lt;plugin&amp;gt;	&amp;lt;groupId&amp;gt;org.codehaus.mojo&amp;lt;/groupId&amp;gt;	&amp;lt;artifactId&amp;gt;wagon-maven-plugin&amp;lt;/artifactId&amp;gt;	&amp;lt;version&amp;gt;1.0&amp;lt;/versio">
 
 
 
@@ -354,7 +354,8 @@
       
 
       
-        <p>wagon-maven-plugin，用来把打包之后的文件发送到服务器上<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;wagon-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">		&lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">		&lt;fromFile&gt;target/ROOT.war&lt;/fromFile&gt;</span><br><span class="line">		&lt;url&gt;scp:<span class="comment">//用户名@服务器ip/服务器路径/jetty/webapps&lt;/url&gt;</span></span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+        <p>wagon-maven-plugin,用来把打包之后的文件发送到服务器上<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>wagon-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">fromFile</span>&gt;</span>target/ROOT.war<span class="tag">&lt;/<span class="name">fromFile</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>scp://用户名@服务器ip/服务器路径/jetty/webapps<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>就是参照了linux的scp命令,当然如果使用的是mac的话,可以在终端直接实现.</p>
 
       
     </div>

@@ -358,7 +358,7 @@
         
           
             <p>因为项目需要经常性的修改-打包-上传到服务器，包含lib的war包比较大，第三方jar包基本不会大动，所以就想把这些jar包移出war包，放在jetty里面，这样每次只需要编译打包源码即可，war包大小极度减小，方便上传。<br>maven配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line">    &lt;configuration&gt;</span><br><span class="line">        &lt;warName&gt;ROOT&lt;/warName&gt;</span><br><span class="line">        &lt;packagingExcludes&gt;</span><br><span class="line">            %regex[WEB-INF/lib/(?!lock-).*.*.jar]</span><br><span class="line">        &lt;/packagingExcludes&gt;</span><br><span class="line">    &lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-war-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">warName</span>&gt;</span>ROOT<span class="tag">&lt;/<span class="name">warName</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">packagingExcludes</span>&gt;</span></span><br><span class="line">            %regex[WEB-INF/lib/(?!lock-).*.*.jar]</span><br><span class="line">        <span class="tag">&lt;/<span class="name">packagingExcludes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>打包的时候排除/WEB-INF/lib/下面的jar包，lock- 是我自己的jar包，需要保留，所以使用正则处理了一下。<br>其他的第三方jar包全放在/jetty/lib/ext 中。</p>
 
           
@@ -604,7 +604,7 @@
         
           <p>最近项目需求需要模拟微信的朋友圈功能，实现可以发送图文消息，好友可以查看，满足添加新的好友之后，可以在朋友圈中刷新到好友的消息，看了许多文章，琢磨出来一套流程。这里只记录一下我的实现思路，并不贴上实际的代码。</p>
 <p>核心结构有三张表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#消息表</span><br><span class="line">CREATE TABLE `t_friend_circle_message` (</span><br><span class="line">  `id` bigint(15) NOT NULL AUTO_INCREMENT COMMENT &apos;主键&apos;,</span><br><span class="line">  `uid` bigint(15) DEFAULT NULL COMMENT &apos;用户id&apos;,</span><br><span class="line">  `content` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,</span><br><span class="line">  `picture` varchar(200) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT &apos;&apos; COMMENT &apos;图片&apos;,</span><br><span class="line">  `location` varbinary(100) DEFAULT &apos;&apos; COMMENT &apos;位置&apos;,</span><br><span class="line">  `create_time` datetime DEFAULT NULL COMMENT &apos;创建日期&apos;,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#消息表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`t_friend_circle_message`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">bigint</span>(<span class="number">15</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'主键'</span>,</span><br><span class="line">  <span class="string">`uid`</span> <span class="built_in">bigint</span>(<span class="number">15</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'用户id'</span>,</span><br><span class="line">  <span class="string">`content`</span> <span class="built_in">varchar</span>(<span class="number">500</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_unicode_ci <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`picture`</span> <span class="built_in">varchar</span>(<span class="number">200</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_unicode_ci <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'图片'</span>,</span><br><span class="line">  <span class="string">`location`</span> varbinary(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="string">''</span> <span class="keyword">COMMENT</span> <span class="string">'位置'</span>,</span><br><span class="line">  <span class="string">`create_time`</span> datetime <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'创建日期'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/11/21/朋友圈的设计及实现/#more" rel="contents">
@@ -729,7 +729,8 @@
       
         
           
-            <p>wagon-maven-plugin，用来把打包之后的文件发送到服务器上<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">	&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;wagon-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.0&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">	&lt;configuration&gt;</span><br><span class="line">		&lt;source&gt;1.8&lt;/source&gt;</span><br><span class="line">		&lt;target&gt;1.8&lt;/target&gt;</span><br><span class="line">		&lt;fromFile&gt;target/ROOT.war&lt;/fromFile&gt;</span><br><span class="line">		&lt;url&gt;scp:<span class="comment">//用户名@服务器ip/服务器路径/jetty/webapps&lt;/url&gt;</span></span><br><span class="line">	&lt;/configuration&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+            <p>wagon-maven-plugin,用来把打包之后的文件发送到服务器上<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>wagon-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">fromFile</span>&gt;</span>target/ROOT.war<span class="tag">&lt;/<span class="name">fromFile</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">url</span>&gt;</span>scp://用户名@服务器ip/服务器路径/jetty/webapps<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>就是参照了linux的scp命令,当然如果使用的是mac的话,可以在终端直接实现.</p>
 
           
         
@@ -849,10 +850,9 @@
       
         
           <p>MYSQL 5.5 之前，UTF8 编码只支持1-3个字节，只支持BMP这部分的unicode编码区，BMP是从哪到哪，到<a href="http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters这里看，基本就是0000～FFFF这一区。" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Mapping_of_Unicode_characters这里看，基本就是0000～FFFF这一区。</a> 从MYSQL5.5开始，可支持4个字节UTF编码utf8mb4，一个字符最多能有4字节，所以能支持更多的字符集。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">utf8mb4 is a superset of utf8</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">utf8mb4 is a superset of utf8</span><br></pre></td></tr></table></figure>
 <p>utf8mb4兼容utf8，且比utf8能表示更多的字符。 </p>
 <p>emoji存入mysql需要字段字符集为utf8mb4。</p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/29/mysql支持emoji/#more" rel="contents">
@@ -976,8 +976,20 @@
 
       
         
-          <p><strong>Shell支持作用控制，有以下命令实现前后台切换：</strong></p>
-<p>　　1. command&amp; 让进程在后台运行<br>　　2. jobs 查看后台运行的进程<br>　　3. fg %n 让后台运行的进程n到前台来<br>　　4. bg %n 让进程n到后台去<br>　　5. kill %n 杀死job<br>　　PS:”n”为jobs命令查看到的job编号，不是进程编号.<br>　　fg、bg、jobs、&amp;、ctrl + z都是跟系统任务有关的，虽然现在基本上不怎么需要用到这些命令，但学会了也是很实用的.</p>
+          <p>###Shell支持作用控制，有以下命令实现前后台切换：</p>
+<ol>
+<li><code>command&amp;</code> 让进程在后台运行</li>
+<li><code>jobs</code> 查看后台运行的进程</li>
+<li><code>fg %n</code> 让后台运行的进程n到前台来</li>
+<li><code>bg %n</code> 让进程n到后台去</li>
+<li><code>kill %n</code> 杀死job</li>
+</ol>
+<blockquote>
+<ul>
+<li>“n”为<code>jobs</code>命令查看到的job编号，不是进程编号.</li>
+<li><code>fg</code>、<code>bg</code>、<code>jobs</code>、<code>&amp;</code>、<code>ctrl + z</code>都是跟系统任务有关的，虽然现在基本上不怎么需要用到这些命令，但学会了也是很实用的.</li>
+</ul>
+</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/09/25/Linux任务前后台的切换/#more" rel="contents">
@@ -1102,13 +1114,19 @@
       
         
           
-            <p>记录一下intellij idea下载量最多的插件什么用。</p>
+            <p>记录一下自己平时开发装的插件</p>
 <ol>
 <li>BashSupport  对于IntelliJ的Bash语言支持.</li>
 <li>Markdown support  使用普通文本编辑器编写的标记语言.</li>
-<li>Lombok plugin Lombok插件，具体使用<a href="http://www.cnblogs.com/holten/p/5729226.html" target="_blank" rel="noopener">Lombok介绍及使用方法</a></li>
-<li>Translation 翻译插件。可以使用有道api</li>
-<li>Grep Console 可以根据规则对控制台输出的日志进行不同颜色的标注</li>
+<li>Lombok plugin Lombok插件,具体使用<a href="http://www.cnblogs.com/holten/p/5729226.html" target="_blank" rel="noopener">Lombok介绍及使用方法</a></li>
+<li>Translation 翻译插件.可选择google或有道翻译.</li>
+<li>Grep Console 可以根据规则对控制台输出的日志进行不同颜色的标注.</li>
+<li>AceJump 快速光标跳转.</li>
+<li>Alibaba Java Coding Guidelines <a href="https://github.com/alibaba/p3c" target="_blank" rel="noopener">阿里巴巴java开发规约插件</a></li>
+<li>JRebel 支持tomcat jetty 热部署的,免去重启中间件的烦恼,注册可免费使用.<a href="http://blog.csdn.net/lawsonjin/article/details/76422807" target="_blank" rel="noopener">无限制使用教程</a></li>
+<li>Iedis 实用的redis插件.<a href="https://www.codesmagic.com/iedis" target="_blank" rel="noopener">官网地址</a></li>
+<li>Mybatis plugin 实用的mybatis插件.<a href="https://www.codesmagic.com/mybatisplugin" target="_blank" rel="noopener">官网地址</a></li>
+<li>statistic 统计代码用.</li>
 </ol>
 
           
